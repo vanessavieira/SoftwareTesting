@@ -8,9 +8,8 @@
 ##### Código da aluna: 15
 
 ### Métodos:
-####public MyQueue(int size):
+#### public MyQueue(int size):
 Construtor da fila que aceita como parâmetro um inteiro que representa a capacidade máxima de elementos que a fila poderá carregar.
-Nesta função, o Array do tipo Object[] deverá ser inicializado com esse valor.
 
 #### public void enqueue(T element):
 Método de inserção de elementos genéricos na fila. Deverá inserir sempre na primeira posição livre após o último elemento da fila.
