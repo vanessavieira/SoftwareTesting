@@ -1,8 +1,10 @@
 package QueuePack;
 
-public class MyQueue<T> implements Queue<T> {
+import java.util.ArrayList;
 
-    private Object[] queue;
+public class MyQueue<T> {
+
+    private ArrayList<T> queue;
     private int first;
     private int last;
     private int currentSize;
@@ -13,9 +15,9 @@ public class MyQueue<T> implements Queue<T> {
      */
 
     public MyQueue(int size) {
-        this.queue = new Object[size];
+        this.queue = new ArrayList<T>();
         this.first = 0;
-        this.last = 0;
+        this.last = size - 1;
         this.currentSize = 0;
     }
 
@@ -24,7 +26,7 @@ public class MyQueue<T> implements Queue<T> {
      */
 
     private boolean isFull() {
-        if (this.currentSize == this.queue.length)
+        if (this.currentSize == this.queue.size())
             return true;
         return false;
     }
@@ -38,8 +40,8 @@ public class MyQueue<T> implements Queue<T> {
         if (this.isFull()) {
             throw new QueueIsFullException("Queue is full.");
         } else {
-            this.last = (this.last + 1) % this.queue.length;
-            this.queue[last] = element;
+            this.last = (this.last + 1) % this.queue.size();
+            this.queue.add(element);
             this.currentSize++;
         }
         checkRep();
@@ -64,7 +66,7 @@ public class MyQueue<T> implements Queue<T> {
             checkRep();
             throw new QueueIsEmptyException("QueuePack is empty");
         } else {
-            final T aux = (T) this.queue[first];
+            final T aux = this.queue.get(first);
             checkRep();
             return aux;
         }
@@ -91,9 +93,9 @@ public class MyQueue<T> implements Queue<T> {
             checkRep();
             throw new QueueIsEmptyException("QueuePack is empty.");
         } else {
-            T aux = (T) this.queue[this.first];
-            this.queue[this.first] = null;
-            this.first = (this.first + 1) % this.queue.length;
+            T aux = (T) this.queue.get(first);
+            this.queue.add(first,null);
+            this.first = (this.first + 1) % this.queue.size();
             this.currentSize--;
             checkRep();
             return aux;
@@ -110,11 +112,11 @@ public class MyQueue<T> implements Queue<T> {
         checkRep();
         String ans = "QueuePack = {";
 
-        for (int i = 0; i < this.queue.length; i++) {
-            if (i < this.queue.length - 1) {
-                ans += this.queue[i] + ", ";
+        for (int i = 0; i < this.queue.size(); i++) {
+            if (i < this.queue.size() - 1) {
+                ans += this.queue.get(i) + ", ";
             } else {
-                ans += this.queue[i];
+                ans += this.queue.get(i);
             }
         }
 
@@ -132,10 +134,10 @@ public class MyQueue<T> implements Queue<T> {
     }
 
     private void checkRep() {
-        assert(this.currentSize >= 0 && this.currentSize <= this.queue.length);
+        assert(this.currentSize >= 0 && this.currentSize <= this.queue.size());
 
         if (this.last < this.first) {
-            assert((this.first - this.last) == (this.queue.length) - this.currentSize);
+            assert((this.first - this.last) == (this.queue.size()) - this.currentSize);
         }
 
         if (this.last > this.first) {
@@ -143,7 +145,7 @@ public class MyQueue<T> implements Queue<T> {
         }
 
         if (this.last == this.first) {
-            assert(this.currentSize == 0 || this.currentSize == this.queue.length);
+            assert(this.currentSize == 0 || this.currentSize == this.queue.size());
         }
     }
 }
