@@ -1,7 +1,8 @@
 
 ### Review da Especificação e Implementação da Estrutura de Dados: Fila (Queue)
 #### Especificação: Anthony
-#### Implementação: Eduarda
+#### Implementação da especificação: Eduarda
+#### Implementação do teste: Vanessa
 
 ### Geral:
 No geral  a implementação está de acordo com a especificação. Os métodos possuem comportamente assim como foram especificados. O teste foi relativamente simples de ser feito e apurado.
